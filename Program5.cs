@@ -1,31 +1,35 @@
 ﻿using System;
-//Calcular el Mínimo y Máximo en un Array
-//Escribe un programa que permita al usuario ingresar varios números 
-//    y luego determine el valor mínimo y máximo.
+using System.Net;
+
 class Program
 {
+//    Ejercicio 5: Números Primos en un Rango
+//Crea un programa que pida dos números enteros y muestre todos los números primos entre ellos.
     static void Main()
     {
-        Console.Write("Ingrese la cantidad de números: ");
-        int cantidad = int.Parse(Console.ReadLine());
+        Console.Write("Ingrese el inicio del rango: ");
+        int inicio = int.Parse(Console.ReadLine());
 
-        int[] numeros = new int[cantidad];
+        Console.Write("Ingrese el final del rango: ");
+        int final = int.Parse(Console.ReadLine());
 
-        for (int i = 0; i < cantidad; i++)
+        Console.WriteLine("Números primos en el rango:");
+        for (int i = inicio; i <= final; i++)
         {
-            Console.Write($"Ingrese el número {i + 1}: ");
-            numeros[i] = int.Parse(Console.ReadLine());
+            if (EsPrimo(i))
+            {
+                Console.WriteLine(i);
+            }
         }
+    }
 
-        int min = int.MaxValue, max = int.MinValue;
-
-        foreach (int num in numeros)
+    static bool EsPrimo(int numero)
+    {
+        if (numero <= 1) return false;
+        for (int i = 2; i <= Math.Sqrt(numero); i++)
         {
-            if (num < min) min = num;
-            if (num > max) max = num;
+            if (numero % i == 0) return false;
         }
-
-        Console.WriteLine($"Mínimo: {min}");
-        Console.WriteLine($"Máximo: {max}");
+        return true;
     }
 }
