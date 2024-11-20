@@ -1,55 +1,31 @@
 ﻿using System;
-//Ejercicio 4: Determinar la Próxima Montaña Visible
-//Este ejercicio involucra un array de montañas, y 
-//Carmen busca las montañas más altas que tiene al frente.
+//Calcular el Mínimo y Máximo en un Array
+//Escribe un programa que permita al usuario ingresar varios números 
+//    y luego determine el valor mínimo y máximo.
 class Program
 {
     static void Main()
     {
-        int[] cordillera = GenerarCordillera(11, 1500, 3000);
-        MostrarCordillera(cordillera);
+        Console.Write("Ingrese la cantidad de números: ");
+        int cantidad = int.Parse(Console.ReadLine());
 
-        Console.Write("Montaña de comienzo (0-10): ");
-        int inicio = int.Parse(Console.ReadLine());
+        int[] numeros = new int[cantidad];
 
-        MostrarCumbresAAlcanzar(cordillera, inicio);
-    }
-
-    static int[] GenerarCordillera(int tamano, int alturaMin, int alturaMax)
-    {
-        Random rand = new Random();
-        int[] cordillera = new int[tamano];
-        for (int i = 0; i < tamano; i++)
+        for (int i = 0; i < cantidad; i++)
         {
-            cordillera[i] = rand.Next(alturaMin, alturaMax + 1);
+            Console.Write($"Ingrese el número {i + 1}: ");
+            numeros[i] = int.Parse(Console.ReadLine());
         }
-        return cordillera;
-    }
 
-    static void MostrarCordillera(int[] cordillera)
-    {
-        Console.WriteLine("Cordillera generada:");
-        for (int i = 0; i < cordillera.Length; i++)
-        {
-            Console.Write($"{i}\t");
-        }
-        Console.WriteLine();
-        for (int i = 0; i < cordillera.Length; i++)
-        {
-            Console.Write($"{cordillera[i]}m\t");
-        }
-        Console.WriteLine();
-    }
+        int min = int.MaxValue, max = int.MinValue;
 
-    static void MostrarCumbresAAlcanzar(int[] cordillera, int inicio)
-    {
-        for (int i = inicio + 1; i < cordillera.Length; i++)
+        foreach (int num in numeros)
         {
-            if (cordillera[i] > cordillera[inicio])
-            {
-                Console.WriteLine($"Carmen querrá llegar a la cumbre {i} con {cordillera[i]}m.");
-                inicio = i;
-            }
+            if (num < min) min = num;
+            if (num > max) max = num;
         }
+
+        Console.WriteLine($"Mínimo: {min}");
+        Console.WriteLine($"Máximo: {max}");
     }
 }
